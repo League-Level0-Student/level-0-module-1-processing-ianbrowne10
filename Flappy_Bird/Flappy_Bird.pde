@@ -1,6 +1,7 @@
+int flapForce = -10;
 int birdX = 400;
 int birdY = 400;
-int birdYVelocity = 30;
+int birdYVelocity = 0;
 int gravity = 1;
 int pipeX = 600;
 int pipeWidth = 100;
@@ -27,7 +28,8 @@ void teleportPipes() {
   }
 }
 void mousePressed() {
-  birdY=birdY-birdYVelocity;
+birdYVelocity=flapForce;
+
 }
 boolean intersectsPipes() { 
   if (birdY < upperPipeHeight && birdX > pipeX && birdX < (pipeX+pipeWidth)) {
@@ -39,9 +41,10 @@ boolean intersectsPipes() {
   }
 }
 void draw() {
-
+  
   lowerY = upperY + upperPipeHeight + pipeGap;
-  birdY=birdY+gravity;
+  birdY=birdY+birdYVelocity;
+ birdYVelocity+=gravity;
   noStroke();
   background(#0ACCFA);
   fill(#EAE015);
